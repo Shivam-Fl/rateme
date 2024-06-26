@@ -39,8 +39,12 @@ export default function Login() {
       Cookies.set('tokenRateme', data.token, { expires: 7 })
 
       setTimeout(() => {
+        window.location.reload()
+        
+      }, 1500);
+      setTimeout(()=>{
         router.push('/');
-      }, 3000);
+      }, 500)
     } else if (res.status === 404) {
       setMessage(data.message);
       setTimeout(() => {
