@@ -1,7 +1,61 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'animate.css/animate.min.css';
 
+
+@font-face {
+  font-family: 'NeoSansPro-Medium';
+  src: url('/NeoSansPro-Medium.ttf'); /* IE9 Compat Modes */
+  src: url('/NeoSansPro-Medium.ttf') format('embedded-opentype'), /* IE6-IE8 */
+       url('/NeoSansPro-Medium.ttf') format('woff'), /* Modern Browsers */
+       url('/NeoSansPro-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/NeoSansPro-Medium.ttf') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'NeoSansPro-Medium';
+  src: url('/NeoSansPro-Medium.ttf'); /* IE9 Compat Modes */
+  src: url('/NeoSansPro-Medium.ttf') format('embedded-opentype'), /* IE6-IE8 */
+       url('/NeoSansPro-Medium.ttf') format('woff'), /* Modern Browsers */
+       url('/NeoSansPro-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/NeoSansPro-Medium.ttf') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'NeoSansPro-Light';
+  src: url('/NeoSansPro-Light-v2.ttf'); /* IE9 Compat Modes */
+  src: url('/NeoSansPro-Light-v2.ttf') format('embedded-opentype'), /* IE6-IE8 */
+       url('/NeoSansPro-Light-v2.ttf') format('woff'), /* Modern Browsers */
+       url('/NeoSansPro-Light-v2.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/NeoSansPro-Light-v2.ttf') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'NeoSansPro-Regular';
+  src: url('/NeoSansPro-Regular.ttf'); /* IE9 Compat Modes */
+  src: url('/NeoSansPro-Regular.ttf') format('embedded-opentype'), /* IE6-IE8 */
+       url('/NeoSansPro-Regular.ttf') format('woff'), /* Modern Browsers */
+       url('/NeoSansPro-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('/NeoSansPro-Regular.ttf') format('svg'); /* Legacy iOS */
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+ 
+  border-bottom: 3px solid #56e388;
+}
+
+.home {
+  background-image: url("/home/omtrading.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* 
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -31,3 +85,7 @@ body {
     text-wrap: balance;
   }
 }
+
+/* #CAF4FF
+#A0DEFF
+#5AB2FF */ 
