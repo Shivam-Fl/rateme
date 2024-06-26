@@ -3,20 +3,15 @@ import React from 'react';
 
 const features = [
   {
-    icon: '⭐️',
-    title: 'Personalized Ratings',
-    description: 'Get personalized ratings based on your performance.'
+    icon: '🔒',
+    title: 'Anonymous Rating and Feedback',
+    description: 'Provide and receive ratings and feedback anonymously to ensure unbiased and honest opinions.'
   },
   {
-    icon: '📝',
-    title: 'Detailed Feedback',
-    description: 'Receive detailed feedback to understand your strengths and areas for improvement.'
-  },
-//   {
-//     icon: '📈',
-//     title: 'Progress Tracking',
-//     description: 'Track your progress over time with our intuitive dashboard.'
-//   }
+    icon: '👌',
+    title: 'Simple to Use',
+    description: 'Our intuitive interface makes it easy for you to give and receive feedback without any hassle.'
+  }
 ];
 
 function Features() {

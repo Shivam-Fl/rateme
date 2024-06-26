@@ -146,7 +146,7 @@ function Navbar() {
         </a> */}
         <h1 className="font-bold text-xl mt-3">Rate me</h1>
 
-        <div className="hidden md:flex self-center z-[200] items-center">
+        {/* <div className="hidden md:flex self-center z-[200] items-center">
           <div className="flex gap-x-8 lg:gap-x-20 self-center text-lg xl:text-xl font-montserrat font-bold dark:font-medium dark:text-gray-100 text-gray-800">
             {navLink.map((link) => (
               <Link key={link.id} href={link.link}>
@@ -163,7 +163,7 @@ function Navbar() {
               </Link>
             ))}
           </div>
-        </div>
+        </div> */}
 
         <div className="flex gap-x-2 sm:gap-x-4 self-center">
           {/* <button onClick={toggleTheme} className="md:mx-10" type="button">
@@ -173,7 +173,7 @@ function Navbar() {
               <img height="30" width="30" src="/night-mode.png" />
             )}
           </button> */}
-          <div className="-mr-2 flex md:hidden relative">
+          {/* <div className="-mr-2 flex md:hidden relative">
             <button
               type="button"
               onClick={handleMenuToggle}
@@ -186,7 +186,7 @@ function Navbar() {
                 <img className="h-8 w-8" src="/menu.svg" alt="" />
               )}
             </button>
-          </div>
+          </div> */}
           {!UserToken ? (
                       <Link href="/login">
                       <button
@@ -219,8 +219,14 @@ function Navbar() {
         </div>
         {dropdownVisible && (
         <div  className="absolute right-3 md:mt-20 mt-14 w-48 bg-white shadow-lg rounded-md py-2">
-          <a href="/myDashboard" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">
+                    <a href="/" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">
+            Home
+          </a>
+          <a href="/dashboard" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">
             Dashboard
+          </a>
+          <a href="/create-campaign" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">
+            Create Campaign
           </a>
           <a onClick={Logout} type="button" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg hover:cursor-pointer">
             Logout

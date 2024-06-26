@@ -157,13 +157,14 @@ const RegisterForm = () => {
             Register
           </button>
         </div>
-      </form>
-      <a
+        <a
           className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-400 mt-4"
           href="/login"
         >
           Already an user??, Login
         </a>
+      </form>
+
     </div>
   );
 };

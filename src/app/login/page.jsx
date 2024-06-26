@@ -56,11 +56,11 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+    <div className="min-h-[90vh] flex items-center justify-center bg-gray-100 dark:bg-gray-900 ">
       <Head>
         <title>Login</title>
       </Head>
-      <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-sm">
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-full max-w-sm mx-2">
         {message && <p className="mb-4 text-center text-red-500 dark:text-red-400">{message}</p>}
         <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Login</h2>
         <form onSubmit={handleSubmit}>
@@ -99,12 +99,12 @@ export default function Login() {
             >
               Log In
             </button>
-            <a
+            {/* <a
               className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-400"
               href="#"
             >
               Forgot Password?
-            </a>
+            </a> */}
           </div>
         </form>
         <a

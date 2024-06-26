@@ -17,8 +17,8 @@ export default function Home() {
       <HowItWorks />
       {/* <Testimonials />
       <Pricing /> */}
-      <FAQs />
-      <Footer />
+      {/* <FAQs /> */}
+      {/* <Footer /> */}
       <BottomBar />
     </>
   );
