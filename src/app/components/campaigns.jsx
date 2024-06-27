@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 const Dashboard = () => {
   const [user, setUser] = useState({});
   const [campaigns, setCampaigns] = useState();
+  const [loading, setLoading] = useState(true);
   const [expandedCampaign, setExpandedCampaign] = useState(null);
   const token = Cookies.get('tokenRateme');
 
@@ -18,6 +19,7 @@ const Dashboard = () => {
           },
         });
         setCampaigns(campaignResponse.data.campaigns);
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching data', error);
       }
@@ -48,15 +50,15 @@ const Dashboard = () => {
     return stars;
   };
 
-  if(!campaigns){
-    return <div>Loading...</div>
+  if(loading){
+    return <div className="min-h-[90vh]">Loading...</div>
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 min-h-[90vh]">
       <h2 className="text-2xl font-bold mb-4">Campaigns</h2>
       <div className="flex flex-col gap-y-1">
-        {campaigns.length > 0 ? (
+        { campaigns && campaigns.length > 0 ? (
           campaigns.map((campaign) => (
             <div onClick={() => toggleExpand(campaign._id)} key={campaign._id} className="mb-4 shadow-lg rounded-3xl p-4">
               <div className="flex items-center justify-between">
