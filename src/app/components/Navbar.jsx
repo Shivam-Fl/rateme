@@ -207,7 +207,7 @@ function Navbar() {
               ) : (
                 <img 
           
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Ic_arrow_drop_down_36px.svg/1200px-Ic_arrow_drop_down_36px.svg.png" className="w-10 h-10"/>
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Ic_arrow_drop_down_36px.svg/1200px-Ic_arrow_drop_down_36px.svg.png" className="md:w-10 md:h-10 w-8 h-8"/>
               )}
             </button>
           </div>
