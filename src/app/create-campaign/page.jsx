@@ -36,8 +36,12 @@ const CreateCampaign = () => {
 
   const handleShare = async () => {
     if (navigator.share) {
+      const response = await fetch(qrCode);
+      const blob = await response.blob();
+      const file = new File([blob], 'campaigncode.png', {type : blob.type})
       try {
         await navigator.share({
+          files: [file],
           title: campaignLink.ratedAs,
           description: campaignLink.description,
           url: campaignLink.campaignLink
