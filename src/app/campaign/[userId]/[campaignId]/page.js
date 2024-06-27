@@ -99,10 +99,10 @@ const CampaignPage = ({ params }) => {
     return stars;
   };
 
-  if (!campaign) return <div className="text-2xl font-semibold flex justify-center items-center"> <p> Loading...</p> </div>;
+  if (!campaign) return <div className="text-2xl font-semibold flex justify-center content-center min-h-[90vh]"> <p> Loading...</p> </div>;
 
   return (
-    <div className="max-w-md mx-auto mt-8 flex flex-col h-[90vh] justify-center items-center">
+    <div className="max-w-md mx-auto mt-8 flex flex-col h-[90vh] justify-center items-center ">
       {message && (
         <>
                   <div
@@ -118,7 +118,7 @@ const CampaignPage = ({ params }) => {
         <img
           src={campaign.creatorPhoto}
           alt="Campaign Creator"
-          className="w-64 h-64 rounded-full mb-4 shadow-lg"
+          className="w-48 h-48 rounded-full mb-4 shadow-lg"
         />
         <h1 className="text-2xl font-bold mb-4">{campaign.description}</h1>
         

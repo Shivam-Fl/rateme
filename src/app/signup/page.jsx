@@ -1,24 +1,38 @@
 // components/RegisterForm.js
-"use client"
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { CldUploadButton } from 'next-cloudinary';
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { CldUploadButton } from "next-cloudinary";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
-    photo: '',
-    photoID: '',
-    name: '',
-    email: '',
-    phone: '',
-    password: '',
+    photo: "",
+    photoID: "",
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
   });
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState("");
+  const [emailError, setEmailError] = useState("");
   const router = useRouter();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    if (name === "email") {
+      validateEmail(value);
+    }
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError("Invalid email format");
+    } else {
+      setEmailError("");
+    }
   };
 
   const handleImageUpload = (result) => {
@@ -26,71 +40,95 @@ const RegisterForm = () => {
     if ("secure_url" in info && "public_id" in info) {
       const photo = info.secure_url;
       const photoID = info.public_id;
-      setFormData(prevFormData => ({ ...prevFormData, photo, photoID }));
+      setFormData((prevFormData) => ({ ...prevFormData, photo, photoID }));
     }
   };
-  const handleSubmit = async (e) => {
-    console.log(formData)
-    e.preventDefault();
-    const res = await fetch('/api/signup',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-        },
-      body : JSON.stringify(formData)
-    })
 
-    const isJson = res.headers.get('content-type')?.includes('application/json');
-    const data = isJson ? res.json : null
-    if (res.status == 201){
-      setMessage("User Registered Successfully, proceeding to login")
-      router.push('/login')
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (emailError) {
+      setMessage("Please fix the errors in the form");
+      return;
     }
-    else if (res.status == 409){
-      setMessage("Username not unique")
-    }else if (res.status == 401){
-      setMessage("Fill all Credentials")
-    }
-    else if (res.status == 400){
-      setMessage("User already exists, Go to login")
-    }
-    // Reset form fields
-    setFormData({
-      photo: '',
-      photoID: '',
-      name: '',
-      email: '',
-      phone: '',
-      password: ''
+
+    console.log(formData);
+
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     });
 
+    const isJson = res.headers
+      .get("content-type")
+      ?.includes("application/json");
+    const data = isJson ? await res.json() : null;
+
+    if (res.status === 201) {
+      setMessage("User Registered Successfully, proceeding to login");
+      router.push("/login");
+    } else if (res.status === 409) {
+      setMessage("Username not unique");
+    } else if (res.status === 401) {
+      setMessage("Fill all Credentials");
+    } else if (res.status === 400) {
+      setMessage("User already exists, Go to login");
+    }
+
+    // Reset form fields
+    setFormData({
+      photo: "",
+      photoID: "",
+      name: "",
+      email: "",
+      phone: "",
+      password: "",
+    });
   };
 
   return (
     <div className="max-w-md mx-auto mt-8">
-      
-      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-      <p className='text-red-500'>{message}</p>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      >
+        <p className="text-red-500">{message}</p>
         <div className="mb-4">
-
-        { !formData.photo ? (<CldUploadButton
-          onUpload={handleImageUpload}
-          uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
-          className="w-full mb-4 p-2 border rounded dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-        >
-          Upload profile photo
-        </CldUploadButton>) : (<div className="flex gap-x-20 justify-center items-center gap-y-2 ">
-          <img src={formData.photo} className='h-32 w-32 rounded-full shadow-2xl'  />
-          <div className='px-2 py-1 text-white  bg-blue-500 rounded-lg' onClick={()=>{ setFormData(prevFormData => ({ ...prevFormData, photo:'', photoID:'' }))
-
-          }}>Edit</div>
-          </div>
-          
-        )}
-
+          {!formData.photo ? (
+            <CldUploadButton
+              onUpload={handleImageUpload}
+              uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
+              className="w-full mb-4 p-2 border rounded dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+            >
+              Upload profile photo
+            </CldUploadButton>
+          ) : (
+            <div className="flex gap-x-20 justify-center items-center gap-y-2 ">
+              <img
+                src={formData.photo}
+                className="h-32 w-32 rounded-full shadow-2xl"
+              />
+              <div
+                className="px-2 py-1 text-white bg-blue-500 rounded-lg"
+                onClick={() => {
+                  setFormData((prevFormData) => ({
+                    ...prevFormData,
+                    photo: "",
+                    photoID: "",
+                  }));
+                }}
+              >
+                Edit
+              </div>
+            </div>
+          )}
         </div>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 font-bold mb-2">Name</label>
+          <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+            Name
+          </label>
           <input
             type="text"
             id="name"
@@ -102,7 +140,9 @@ const RegisterForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 font-bold mb-2">Email</label>
+          <label htmlFor="email" className="block text-gray-700 font-bold mb-2">
+            Email
+          </label>
           <input
             type="email"
             id="email"
@@ -112,21 +152,38 @@ const RegisterForm = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
           />
+          {emailError && (
+            <p className="text-red-500 text-xs italic">{emailError}</p>
+          )}
         </div>
         <div className="mb-4">
-          <label htmlFor="phone" className="block text-gray-700 font-bold mb-2">Phone Number</label>
+          <label htmlFor="phone" className="block text-gray-700 font-bold mb-2">
+            Phone Number
+          </label>
           <input
-            type="tel"
+            type="text" // Changed from "number" to "text"
             id="phone"
             name="phone"
-            onChange={handleChange}
+            onChange={(event) => {
+              let value = event.target.value.replace(/\D/g, "").slice(0, 10);
+              setFormData({ ...formData, [event.target.name]: value });
+            }}
             value={formData.phone}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             required
+            maxLength="10"
+            placeholder="1234567890"
+            title="Please enter a 10-digit phone number"
           />
         </div>
+
         <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-700 font-bold mb-2">Password</label>
+          <label
+            htmlFor="password"
+            className="block text-gray-700 font-bold mb-2"
+          >
+            Password
+          </label>
           <input
             type="password"
             id="password"
@@ -137,18 +194,6 @@ const RegisterForm = () => {
             required
           />
         </div>
-        {/* <div className="mb-6">
-          <label htmlFor="occupation" className="block text-gray-700 font-bold mb-2">Occupation</label>
-          <input
-            type="text"
-            id="occupation"
-            name="occupation"
-            onChange={handleChange}
-            value={formData.occupation}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            required
-          />
-        </div> */}
         <div className="flex items-center justify-between">
           <button
             type="submit"
@@ -161,10 +206,9 @@ const RegisterForm = () => {
           className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 dark:text-blue-300 dark:hover:text-blue-400 mt-4"
           href="/login"
         >
-          Already an user??, Login
+          Already a user? Login
         </a>
       </form>
-
     </div>
   );
 };
