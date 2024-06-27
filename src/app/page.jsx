@@ -8,11 +8,13 @@ import Pricing from "@/app/components/pricing"
 import FAQs from "@/app/components/faqs"
 import Footer from "@/app/components/footer"
 import BottomBar from "@/app/components/bottombar"
+
 export default function Home() {
+
   return (
     <>
       <Landing/>
-      <Hero />
+      <Hero  />
       <Features />
       <HowItWorks />
       {/* <Testimonials />

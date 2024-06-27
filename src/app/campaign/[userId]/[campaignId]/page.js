@@ -8,6 +8,8 @@ const CampaignPage = ({ params }) => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
   const [hoverRating, setHoverRating] = useState(0);
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(''); // 'success', 'error', or 'warning'
 
   useEffect(() => {
     if (userId && campaignId) {
@@ -21,6 +23,8 @@ const CampaignPage = ({ params }) => {
       setCampaign(res.data);
     } catch (error) {
       console.error('Error fetching campaign:', error);
+      setMessage('Error fetching campaign.');
+      setMessageType('error');
     }
   };
 
@@ -33,8 +37,29 @@ const CampaignPage = ({ params }) => {
         rating,
         comment
       });
-      console.log('Rating submitted:', res.data);
+
+      if (res.status === 201) {
+        setMessage('Rating submitted successfully!');
+        setMessageType('success');
+      } else if (res.status === 404) {
+        setMessage('Campaign not found.');
+        setMessageType('warning');
+      } else {
+        setMessage('Unexpected response from the server.');
+        setMessageType('warning');
+      }
     } catch (error) {
+      if (error.response) {
+        if (error.response.status === 500) {
+          setMessage('Server error.');
+        } else {
+          setMessage('Error submitting rating.');
+        }
+        setMessageType('error');
+      } else {
+        setMessage('Network error.');
+        setMessageType('error');
+      }
       console.error('Error submitting rating:', error);
     }
   };
@@ -77,14 +102,26 @@ const CampaignPage = ({ params }) => {
   if (!campaign) return <div className="text-2xl font-semibold flex justify-center items-center"> <p> Loading...</p> </div>;
 
   return (
-    <div className="max-w-md mx-auto mt-8">
-      <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col justify-center items-center">
+    <div className="max-w-md mx-auto mt-8 flex flex-col h-[90vh] justify-center items-center">
+      {message && (
+        <>
+                  <div
+            className={`mb-4 text-lg text-center ${messageType === 'success' ? 'text-green-500' : messageType === 'warning' ? 'text-yellow-500' : 'text-red-500'}`}
+          >
+            {message}
+          </div>
+          <a href="/create-campaign" className="bg-blue-500 p-2 text-white rounded-xl">Create your own campaign</a>
+          </>
+
+        )}
+     {!message &&( <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col justify-center items-center">
         <img
           src={campaign.creatorPhoto}
           alt="Campaign Creator"
           className="w-64 h-64 rounded-full mb-4 shadow-lg"
         />
         <h1 className="text-2xl font-bold mb-4">{campaign.description}</h1>
+        
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
@@ -119,7 +156,7 @@ const CampaignPage = ({ params }) => {
             </button>
           </div>
         </form>
-      </div>
+      </div>)}
     </div>
   );
 };

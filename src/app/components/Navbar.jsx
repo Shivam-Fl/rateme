@@ -92,23 +92,23 @@ function Navbar() {
 
     setActiveLink(window.location.pathname);
 
-    if (typeof window !== "undefined") {
-      const isDarkMode = localStorage.getItem("theme") === "dark";
-      setDarkMode(isDarkMode);
-      if (isDarkMode) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    }
+    // if (typeof window !== "undefined") {
+    //   const isDarkMode = localStorage.getItem("theme") === "dark";
+    //   setDarkMode(isDarkMode);
+    //   if (isDarkMode) {
+    //     document.documentElement.classList.add("dark");
+    //   } else {
+    //     document.documentElement.classList.remove("dark");
+    //   }
+    // }
   }, [activeLink]);
 
-  const toggleTheme = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    localStorage.setItem("theme", newMode ? "dark" : "light");
-    document.documentElement.classList.toggle("dark");
-  };
+  // const toggleTheme = () => {
+  //   const newMode = !darkMode;
+  //   setDarkMode(newMode);
+  //   localStorage.setItem("theme", newMode ? "dark" : "light");
+  //   document.documentElement.classList.toggle("dark");
+  // };
 
   const handleClick = () => {
     setTimeout(() => {
@@ -119,20 +119,20 @@ function Navbar() {
     }
   };
 
-  const handleMenuToggle = () => {
-    setToggle((prevToggle) => !prevToggle);
-  };
+  // const handleMenuToggle = () => {
+  //   setToggle((prevToggle) => !prevToggle);
+  // };
 
-  const closeMenu = () => {
-    setToggle(false);
-  };
+  // const closeMenu = () => {
+  //   setToggle(false);
+  // };
 
-  const logOut = () => {
-    Cookies.remove("token");
-  };
+  // const logOut = () => {
+  //   Cookies.remove("token");
+  // };
 
   return (
-    <div className="sticky top-0 bg-gray-100 dark:bg-[#1a1a1a] z-[200]">
+    <div className="sticky top-0 bg-gray-100  z-[200]">
       <div className="flex justify-between align-center text-lg sm:text-2xl mx-auto p-4">
         {/* <a
           href="https://www.effilearn.in/"
