@@ -173,20 +173,7 @@ function Navbar() {
               <img height="30" width="30" src="/night-mode.png" />
             )}
           </button> */}
-          {/* <div className="-mr-2 flex md:hidden relative">
-            <button
-              type="button"
-              onClick={handleMenuToggle}
-              className="inline-flex items-center justify-center p-1 rounded-lg text-white hover:ring-white focus:outline-none focus:ring-2 focus:rig-offset-2 focus:ring-offset-white focus:ring-white focus:rig-offset-2 z-[250] "
-            >
-              <span className="sr-only">Open main menu</span>
-              {toggle ? (
-                <img className="h-8 w-8" src="/close1.svg" alt="" />
-              ) : (
-                <img className="h-8 w-8" src="/menu.svg" alt="" />
-              )}
-            </button>
-          </div> */}
+          
           {!UserToken ? (
                       <Link href="/login">
                       <button
@@ -208,9 +195,23 @@ function Navbar() {
             onClick={toggleDropdown}
             alt="User Avatar"
           />
-          <img 
-          onClick={toggleDropdown}
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Ic_arrow_drop_down_36px.svg/1200px-Ic_arrow_drop_down_36px.svg.png" className="w-10 h-10"/></>
+          <div className="-mr-2 flex  relative">
+            <button
+              type="button"
+              onClick={toggleDropdown}
+              className="inline-flex items-center justify-center p-1 rounded-lg text-white hover:ring-white focus:outline-none focus:ring-2 focus:rig-offset-2 focus:ring-offset-white focus:ring-white focus:rig-offset-2 z-[250] "
+            >
+              <span className="sr-only">Open main menu</span>
+              {dropdownVisible ? (
+                <img className="h-8 w-8" src="/close1.svg" alt="" />
+              ) : (
+                <img 
+          
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Ic_arrow_drop_down_36px.svg/1200px-Ic_arrow_drop_down_36px.svg.png" className="w-10 h-10"/>
+              )}
+            </button>
+          </div>
+          </>
             
 
             // <button
@@ -228,7 +229,7 @@ function Navbar() {
             Home
           </a>
           <a href="/dashboard" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">
-            Dashboard
+            Your Campaigns
           </a>
           <a href="/create-campaign" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">
             Create Campaign
