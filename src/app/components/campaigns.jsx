@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 const Dashboard = () => {
   const [user, setUser] = useState({});
-  const [campaigns, setCampaigns] = useState([]);
+  const [campaigns, setCampaigns] = useState();
   const [expandedCampaign, setExpandedCampaign] = useState(null);
   const token = Cookies.get('tokenRateme');
 
@@ -48,9 +48,9 @@ const Dashboard = () => {
     return stars;
   };
 
-//   if(!campaignResponse){
-//     return <div>Loading...</div>
-//   }
+  if(!campaigns){
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="container mx-auto p-4">

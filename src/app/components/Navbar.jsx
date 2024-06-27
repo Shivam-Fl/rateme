@@ -198,8 +198,8 @@ function Navbar() {
                     </Link>
             
           ) : (
-
-            <img
+              <>
+              <img
             src={decoded.photo}
             width={40}
             height={40}
@@ -208,6 +208,11 @@ function Navbar() {
             onClick={toggleDropdown}
             alt="User Avatar"
           />
+          <img 
+          onClick={toggleDropdown}
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Ic_arrow_drop_down_36px.svg/1200px-Ic_arrow_drop_down_36px.svg.png" className="w-10 h-10"/></>
+            
+
             // <button
             //   onClick={handleReload}
             //   type="button"

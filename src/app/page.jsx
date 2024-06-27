@@ -7,7 +7,7 @@ import Testimonials from "@/app/components/testimonials"
 import Pricing from "@/app/components/pricing"
 import FAQs from "@/app/components/faqs"
 import Footer from "@/app/components/footer"
-import BottomBar from "@/app/components/bottombar"
+
 
 export default function Home() {
 
@@ -21,7 +21,7 @@ export default function Home() {
       <Pricing /> */}
       {/* <FAQs /> */}
       {/* <Footer /> */}
-      <BottomBar />
+      
     </>
   );
 }
